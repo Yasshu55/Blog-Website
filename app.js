@@ -1,5 +1,4 @@
-//jshint esversion:6
-
+// Blog Website
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -20,7 +19,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 
-app.get("/", function(req,res){
+app.get("/", (req,res) =>{
   res.render("home", {randomHomeContent:homeStartingContent,
     posts: posts,
     arr: arr
@@ -28,7 +27,7 @@ app.get("/", function(req,res){
 //  res.render("home",{posts: posts});
 });
 
-app.get("/posts/:postContent",function(req,res){
+app.get("/posts/:postContent",(req,res) =>{
     const topURL = _.lowerCase(req.params.postContent);
 
     posts.forEach(function(post){
@@ -45,19 +44,19 @@ app.get("/posts/:postContent",function(req,res){
 });
 
 
-app.get("/about", function(req,res){
+app.get("/about", (req,res) =>{
   res.render("about",{randomAboutContent : aboutContent});
 });
 
-app.get("/contact", function(req,res){
+app.get("/contact", (req,res) =>{
   res.render("contact", {randomContactContent : contactContent});
 });
 
-app.get("/compose", function(req,res){
+app.get("/compose", (req,res) =>{
   res.render("compose")
 });
 
-app.post("/compose", function(req,res){
+app.post("/compose", (req,res) =>{
  const post = {
   title: req.body.postTitle,
   content: req.body.postInput
